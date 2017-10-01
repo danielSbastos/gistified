@@ -27,9 +27,8 @@ Run the following commands:
 ```
 pip install -r requirements.txt
 /bin/bash ./config_db.sh
-export FLASK_CONFIG=development
 export FLASK_APP=run.py
-flask run
+FLASK_DEBUG=True flask run
 ```
 
 ### Tests
