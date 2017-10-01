@@ -1,0 +1,7 @@
+Flask==0.12
+Flask-Migrate==2.1.1
+Flask-SQLAlchemy==2.2
+psycopg2==2.7.1
+
+pytest==3.2.2
+tox==2.8.2
