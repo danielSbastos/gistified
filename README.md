@@ -24,9 +24,17 @@ pyenv virtualenv 3.6.1 gistified
 
 Run the following commands:
 
+Setup db and install libs
+
 ```
 pip install -r requirements.txt
 /bin/bash ./config_db.sh
+```
+
+Apply migrations and run app
+
+```
+flask db upgrade
 export FLASK_APP=run.py
 FLASK_DEBUG=True flask run
 ```
