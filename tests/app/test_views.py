@@ -53,7 +53,22 @@ class TestViews(TestCase):
             body='test.test'
             )
         )
-        self.assertRedirects(response, '/gists/create')
+
+        self.assertRedirects(response, '/gist/1')
         self.assertEqual(Gist.query.count(), 1)
         self.assertEqual(Gist.query.all()[0].title, 'test.py')
         self.assertEqual(Gist.query.all()[0].body, 'test.test')
+
+    def test_show_individual_gist(self):
+        self._create_gist('test.py', 'test.test')
+        response = self.client.get('/gist/1')
+
+        self.assert_template_used('gist_id.html')
+        self.assertTrue(b'test.py' in response.data)
+        self.assertTrue(b'test.test' in response.data)
+
+    @staticmethod
+    def _create_gist(title, body):
+        gist = Gist(title=title, body=body)
+        db.session.add(gist)
+        db.session.commit()
