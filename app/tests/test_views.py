@@ -3,11 +3,11 @@ import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_testing import TestCase
 import unittest
 
 from app import create_app, db
 from app.models import Gist
-from flask_testing import TestCase
 
 
 class TestViews(TestCase):
