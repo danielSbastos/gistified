@@ -14,8 +14,13 @@ class TestViews(TestCase):
 
     def create_app(self):
         app = create_app()
+        if os.getenv('CIRCLECI'):
+            database_uri = os.getenv('SQLALCHEMY_DATABASE_URI')
+        else:
+            database_uri = 'postgresql:///gistified_test'
+
         app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-        app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///gistified_test'
+        app.config['SQLALCHEMY_DATABASE_URI'] = database_uri
         db.init_app(app)
         return app
 

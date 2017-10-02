@@ -6,12 +6,12 @@ from flask_migrate import Migrate
 
 
 db = SQLAlchemy()
-app = Flask(__name__, instance_relative_config=True)
+app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///gistified'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
 def create_app():
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///gistified'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
     db.init_app(app)
     migrate = Migrate(app, db)
     from app import models
