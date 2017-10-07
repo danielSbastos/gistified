@@ -14,7 +14,7 @@ Run the following commands:
 
 ```
 sudo apt-get update
-sudo apt-get install postgres libpq-dev
+sudo apt-get install postgresql libpq-dev
 
 pyenv install 3.6.1
 pyenv virtualenv 3.6.1 gistified
