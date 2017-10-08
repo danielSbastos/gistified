@@ -34,8 +34,8 @@ pip install -r requirements.txt
 Apply migrations and run app
 
 ```
-flask db upgrade
 export FLASK_APP=run.py
+flask db upgrade
 FLASK_DEBUG=True flask run
 ```
 
