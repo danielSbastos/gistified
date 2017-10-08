@@ -14,7 +14,7 @@ db = SQLAlchemy(app)
 def create_app():
     db.init_app(app)
     migrate = Migrate(app, db)
-    from app import models
-    from app import views
+    from gistified import models
+    from gistified import views
 
     return app

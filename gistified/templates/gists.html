@@ -1,0 +1,8 @@
+<!doctype html>
+
+<body>
+    <title>All gists</title>
+    {% for gist in gists: %}
+        <a href="/gist/{{gist.id}}">{{gist.title}}</a><br>
+    {% endfor %}
+</body>

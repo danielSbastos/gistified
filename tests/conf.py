@@ -2,7 +2,7 @@ import os
 
 from flask_testing import TestCase
 
-from app import create_app, db
+from gistified import create_app, db
 
 
 class ApplicationTestCase(TestCase):
