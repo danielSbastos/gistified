@@ -1,6 +1,6 @@
 from flask import render_template, request, redirect, session
 
-from app import app, db
+from gistified import app, db
 from .models import Gist
 
 
@@ -32,7 +32,8 @@ def gists():
     """
     List all gists
     """
-    return render_template('gists.html')
+    gists = Gist.query.all()
+    return render_template('gists.html', gists=gists)
 
 
 @app.route('/gist/<id>', methods=['GET'])

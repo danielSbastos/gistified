@@ -1,6 +1,6 @@
 from ..conf import ApplicationTestCase
-from app.models import Gist
-from app import db
+from gistified.models import Gist
+from gistified import db
 
 
 class TestViews(ApplicationTestCase):
@@ -38,6 +38,31 @@ class TestViews(ApplicationTestCase):
         self.assert_template_used('gist_id.html')
         self.assertTrue(b'test.py' in response.data)
         self.assertTrue(b'test.test' in response.data)
+
+    def test_all_gist(self):
+        gists = [{
+            'title': 'hello.py',
+            'body': """
+                    def add(a, b):
+                        return a + b
+                    """
+            }, {
+            'title': 'hello.rb',
+            'body': """
+                    def add(a, b)
+                        a + b
+                    end
+                    """
+        }]
+        for gist in gists:
+            self._create_gist(gist['title'], gist['body'])
+
+        response = self.client.get('/gists')
+        self.assert_template_used('gists.html')
+        self.assertTrue(b'hello.py' in response.data)
+        self.assertTrue(b'/gist/1' in response.data)
+        self.assertTrue(b'hello.rb' in response.data)
+        self.assertTrue(b'/gist/2' in response.data)
 
     @staticmethod
     def _create_gist(title, body):
