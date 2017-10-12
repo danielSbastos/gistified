@@ -41,5 +41,9 @@ def gists_id(id):
     """
     Show single gist
     """
-    gist = Gist.query.filter_by(id=id).first()
-    return render_template('gist_id.html', gist=gist)
+    try:
+        int(id)
+        gist = Gist.query.filter_by(id=id).first()
+        return render_template('gist_id.html', gist=gist)
+    except:
+        return render_template('404.html')
