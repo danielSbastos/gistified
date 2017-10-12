@@ -2,6 +2,13 @@
 
 #### Flask app where code snippets can be created with syntax highlight and language recognition.
 
+- Syntax highlight is done with [Prettify](https://github.com/google/code-prettify)
+
+- Language recognition is achieved with [Pygments](http://pygments.org/)
+
+
+Right now, all code snippets are highlighted, however, this does not mean their language is recognized. With that, language recognition is limited to file extentions, this means that a code snippet will only have its language found if the file extension is right. For example, `blabla.py` will match `Python`, `blabla.rb` to `Ruby` and on.
+
 
 ### Dependencies
 

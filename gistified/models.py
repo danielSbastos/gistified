@@ -1,7 +1,3 @@
-from pygments.lexers import get_lexer_for_filename
-
-import re
-
 from . import db
 
 
@@ -19,13 +15,3 @@ class Gist(db.Model):
 
     def __repr__(self):
         return self.title
-
-    @staticmethod
-    def language(title):
-        try:
-            lang_lexer = str(get_lexer_for_filename(title))
-            lang = re.search('lexers.(.*)Lexer', lang_lexer).group(1)
-        except:
-            lang = "undefined"
-
-        return lang

@@ -1,5 +1,6 @@
 from ..conf import ApplicationTestCase
 from gistified.models import Gist
+from gistified.lang_detection import which_lang
 from gistified import db
 
 
@@ -36,7 +37,7 @@ class TestViews(ApplicationTestCase):
     def test_show_individual_gist(self):
         title = 'test.py'
         body = 'print("Hello, World!")'
-        lang = Gist.language(title)
+        lang = which_lang(title)
 
         self._create_gist(title, body, lang)
         response = self.client.get('/gist/1')
