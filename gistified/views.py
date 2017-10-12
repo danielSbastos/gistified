@@ -1,7 +1,8 @@
-from flask import render_template, request, redirect, session
+from flask import render_template, request, redirect, session, abort
 
 from gistified import app, db
 from .models import Gist
+from .lang_detection import which_lang
 
 
 @app.route('/')
@@ -19,7 +20,8 @@ def gists_create():
     else:
         title = request.form['title']
         body = request.form['body']
-        new_gist = Gist(title, body)
+        lang = which_lang(title)
+        new_gist = Gist(title, body, lang)
 
         db.session.add(new_gist)
         db.session.commit()
@@ -46,4 +48,4 @@ def gists_id(id):
         gist = Gist.query.filter_by(id=id).first()
         return render_template('gist_id.html', gist=gist)
     except:
-        return render_template('404.html')
+        abort(404)
