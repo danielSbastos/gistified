@@ -4,6 +4,6 @@ Flask-SQLAlchemy==2.2
 Flask-Testing>=0.4.1
 psycopg2==2.7.1
 blinker==1.4
-
+pygments
 pytest==3.2.2
 tox==2.8.2
