@@ -20,52 +20,66 @@ class TestViews(ApplicationTestCase):
         self.assertTrue(b'Gist' in response.data)
 
     def test_post_gists_create(self):
+        title = 'test.py'
+        body = 'print("Hello, World!")'
+
         response = self.client.post('/gists/create', data=dict(
-            title='test.py',
-            body='test.test'
+            title=title,
+            body=body,
             )
         )
-
         self.assertRedirects(response, '/gist/1')
         self.assertEqual(Gist.query.count(), 1)
-        self.assertEqual(Gist.query.all()[0].title, 'test.py')
-        self.assertEqual(Gist.query.all()[0].body, 'test.test')
+        self.assertEqual(Gist.query.all()[0].title, title)
+        self.assertEqual(Gist.query.all()[0].body, body)
 
     def test_show_individual_gist(self):
-        self._create_gist('test.py', 'test.test')
+        title = 'test.py'
+        body = 'print("Hello, World!")'
+        lang = Gist.language(title)
+
+        self._create_gist(title, body, lang)
         response = self.client.get('/gist/1')
 
         self.assert_template_used('gist_id.html')
-        self.assertTrue(b'test.py' in response.data)
-        self.assertTrue(b'test.test' in response.data)
+        self.assertTrue(title in str(response.data))
+        self.assertTrue(lang in str(response.data))
 
-    def test_all_gist(self):
+    def test_wrong_id_returns_404(self):
+        response = self.client.get('/gist/bla')
+
+        with self.assertRaises(Exception):
+            self.assertEqual(response, 404)
+
+    def test_all_gists(self):
         gists = [{
             'title': 'hello.py',
             'body': """
                     def add(a, b):
                         return a + b
-                    """
+                    """,
+            'lang': 'Python'
             }, {
             'title': 'hello.rb',
             'body': """
                     def add(a, b)
                         a + b
                     end
-                    """
+                    """,
+            'lang': 'Ruby'
         }]
         for gist in gists:
-            self._create_gist(gist['title'], gist['body'])
+            self._create_gist(gist['title'], gist['body'], gist['lang'])
 
         response = self.client.get('/gists')
         self.assert_template_used('gists.html')
-        self.assertTrue(b'hello.py' in response.data)
-        self.assertTrue(b'/gist/1' in response.data)
-        self.assertTrue(b'hello.rb' in response.data)
-        self.assertTrue(b'/gist/2' in response.data)
+        self.assertTrue(gists[0]['title'] in str(response.data))
+        self.assertTrue('/gist/1' in str(response.data))
+        self.assertTrue(gists[1]['title'] in str(response.data))
+        self.assertTrue('/gist/2' in str(response.data))
 
     @staticmethod
-    def _create_gist(title, body):
-        gist = Gist(title=title, body=body)
+    def _create_gist(title, body, lang):
+        gist = Gist(title=title, body=body, lang=lang)
         db.session.add(gist)
         db.session.commit()
