@@ -3,15 +3,24 @@
 <head>
     <title> Home </title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <style> .vertical-center {
+        min-height: 100%;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        background-color: white
+    }
+    </style>
+
 </head>
 
 <body>
-    <div class="container">
-        <div class="row align-items-center" style="min-height:30rem">
-            <div class="col">
-                <a href="/gists">View all gists</a><br><hr>
-                <a href="/gists/create">Create new gist</a>
-            </div>
+    <div class="jumbotron jumbotron-fluid vertical-center"> <!--  style="background-color: lightblue"> -->
+        <div class="container">
+            <h1 class="display-3" style="font-weight: 600";>Gistified</h1><hr>
+            <p class="lead">Create code snippets with syntax highlight and language recognition</p>
+            <a href="/gists" class="btn btn-info" role="button">View all gists</a>
+            <a href="/gists/create" class="btn btn-success" role="button">Create new gist</a>
         </div>
     </div>
 </body>
