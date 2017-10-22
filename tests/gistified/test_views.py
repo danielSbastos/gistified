@@ -17,7 +17,7 @@ class TestViews(ApplicationTestCase):
         response = self.client.get('/gists/create')
         self.assertEqual(response.status_code, 200)
         self.assert_template_used('gists_create.html')
-        self.assertTrue(b'Title' in response.data)
+        self.assertTrue(b'Filename' in response.data)
         self.assertTrue(b'Gist' in response.data)
 
     def test_post_gists_create(self):

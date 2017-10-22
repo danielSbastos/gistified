@@ -3,20 +3,26 @@
 <head>
     <title>Create gist</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <style>
+      .container {
+        padding-top: 45px;
+      }
+    </style>
 </head>
 
 <body>
     <form action="/gists/create" method="POST">
-        <div class="container">
-            <div class="row align-items-center" style="min-height:30rem">
-                <div class="col">
-                    <label>Title</label><br>
-                        <input type="text" name="title"><br><br>
-                    <label>Gist</label><br>
-                        <textarea name="body" rows="20" cols="100"></textarea><br><br>
-                    <input type="submit" value="Create">
-                </div>
+        <div class="container container">
+            <div class="form-group">
+                <label for="title">Filename</label>
+                <input type="text" name="title" class="form-control" aria-describedby="titleHelp">
+                <small id="titleHelp" class="form-text text-muted">Please write the filename with the proper extension.</small>
             </div>
+            <div class="form-group">
+                <label for="body">Gist</label>
+                <textarea class="form-control" name="body" rows="18"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
         </div>
     </form>
 </body>
