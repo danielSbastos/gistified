@@ -9,6 +9,7 @@
 
 Right now, all code snippets are highlighted, however, this does not mean their language is recognized. With that, language recognition is limited to file extentions, this means that a code snippet will only have its language found if the file extension is right. For example, `blabla.py` will match `Python`, `blabla.rb` to `Ruby` and on.
 
+This is not done yet. If I have nothing else to do on my weekends and contain motivation and will power, I do little things, not big ones. Therefore, it should take a long time for me to finish this project.
 
 ### Dependencies
 
