@@ -7,3 +7,4 @@ blinker==1.4
 pygments
 pytest==3.2.2
 tox==2.8.2
+gunicorn==19.7.1
