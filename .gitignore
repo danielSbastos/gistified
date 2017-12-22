@@ -103,3 +103,6 @@ ENV/
 #intellij
 .idea
 bots.iml
+
+
+node_modules/
