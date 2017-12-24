@@ -24,10 +24,9 @@ class TestViews(ApplicationTestCase):
         title = 'test.py'
         body = 'print("Hello, World!")'
 
-        response = self.client.post('/gists/create', data=dict(
-            title=title,
-            body=body,
-            )
+        response = self.client.post(
+            '/gists/create',
+            data=dict(title=title, body=body)
         )
         self.assertRedirects(response, '/gist/1')
         self.assertEqual(Gist.query.count(), 1)
@@ -39,7 +38,7 @@ class TestViews(ApplicationTestCase):
         body = 'print("Hello, World!")'
         lang = which_lang(title)
 
-        self._create_gist(title, body, lang)
+        self.__create_gist(title, body, lang)
         response = self.client.get('/gist/1')
 
         self.assert_template_used('gist_id.html')
@@ -70,7 +69,7 @@ class TestViews(ApplicationTestCase):
             'lang': 'Ruby'
         }]
         for gist in gists:
-            self._create_gist(gist['title'], gist['body'], gist['lang'])
+            self.__create_gist(gist['title'], gist['body'], gist['lang'])
 
         response = self.client.get('/gists')
         self.assert_template_used('gists.html')
@@ -79,8 +78,22 @@ class TestViews(ApplicationTestCase):
         self.assertTrue(gists[1]['title'] in str(response.data))
         self.assertTrue('/gist/2' in str(response.data))
 
+    def test_delete_gist(self):
+        self.__create_gist('test1.rb', "'1'.to_i", 'Ruby')
+        self.__create_gist('test2.rb', "'2'.to_i", 'Ruby')
+
+        response = self.client.post(
+            f'/gist/1/delete',
+        )
+
+        deleted_gist = Gist.query.filter_by(title='test1.rb').first()
+        all_gists = Gist.query.all()
+        self.assertFalse(deleted_gist)
+        self.assertEqual(len(all_gists), 1)
+        self.assertEqual(all_gists[0].id, 2)
+
     @staticmethod
-    def _create_gist(title, body, lang):
+    def __create_gist(title, body, lang):
         gist = Gist(title=title, body=body, lang=lang)
         db.session.add(gist)
         db.session.commit()
