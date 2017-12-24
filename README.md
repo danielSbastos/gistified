@@ -60,6 +60,7 @@ tox
 ### TODO
 
 - [ ] Add page to edit a gist;
+- [ ] Add form validation and creation with WTForms;
 - [ ] Enhance frontend in `gist_id.html`;
 - [ ] Alter text area to write gist in `gists.html` to a code editor in browser;
 - [ ] Add user credentials and accounts.;
