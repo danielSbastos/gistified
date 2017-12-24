@@ -45,6 +45,18 @@ class TestViews(ApplicationTestCase):
         self.assertTrue(title in str(response.data))
         self.assertTrue(lang in str(response.data))
 
+    def test_show_individual_gist_undefined_language(self):
+        title = 'test.bla'
+        body = 'print("Hello, World!")'
+        lang = which_lang(title)
+
+        self.__create_gist(title, body, lang)
+        response = self.client.get('/gist/1')
+
+        self.assert_template_used('gist_id.html')
+        self.assertTrue(title in str(response.data))
+        self.assertFalse(lang in str(response.data))
+
     def test_wrong_id_returns_404(self):
         response = self.client.get('/gist/bla')
 

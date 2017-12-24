@@ -16,7 +16,7 @@
       <div class="col">
         <code>{{gist.title}}</code><br><br>
         <pre class="prettyprint"><code>{{gist.body}}</code></pre>
-        {% if gist.lang != "undefined": %}
+        {% if is_lang_defined: %}
           <code>{{gist.lang}}</code>
         {% endif %}
       </div>

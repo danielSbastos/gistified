@@ -46,7 +46,7 @@ def gists_id(id):
     try:
         int(id)
         gist = Gist.query.filter_by(id=id).first()
-        return render_template('gist_id.html', gist=gist)
+        return render_template('gist_id.html', gist=gist, is_lang_defined=Gist.is_lang_defined(gist))
     except:
         abort(404)
 

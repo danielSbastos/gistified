@@ -15,3 +15,7 @@ class Gist(db.Model):
 
     def __repr__(self):
         return self.title
+
+    @staticmethod
+    def is_lang_defined(gist):
+        return gist.lang != "Undefined"
