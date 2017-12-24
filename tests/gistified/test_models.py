@@ -22,3 +22,18 @@ class ModelsTest(ApplicationTestCase):
         self.assertEqual(saved_gist.title, title)
         self.assertEqual(saved_gist.body, body)
         self.assertEqual(saved_gist.lang, language)
+
+    def test_is_lang_defined(self):
+        title = 'daniel.bla'
+        body = """
+            def hahaha(num):
+                return num*num
+            """
+        language = which_lang(title)
+
+        gist = Gist(title, body, language)
+        db.session.add(gist)
+        db.session.commit()
+
+        self.assertFalse(Gist.is_lang_defined(gist))
+

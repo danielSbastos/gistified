@@ -1,30 +1,35 @@
 <!doctype html>
 
 <head>
-    <title>Create gist</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-    <style>
-      .container {
-        padding-top: 45px;
-      }
-    </style>
+  <title>Create gist</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+    .container {
+      padding-top: 45px;
+    }
+  </style>
 </head>
 
 <body>
-    <form action="/gists/create" method="POST">
-        <div class="container container">
-            <div class="form-group">
-                <label for="title">Filename</label>
-                <input type="text" name="title" class="form-control" aria-describedby="titleHelp">
-                <small id="titleHelp" class="form-text text-muted">Please write the filename with the proper extension.</small>
-            </div>
-            <div class="form-group">
-                <label for="body">Gist</label>
-                <textarea class="form-control" name="body" rows="18"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Create</button>
-        </div>
-    </form>
+  <form action="/gists/create" method="POST">
+    <div class="container container">
+      <div class="form-group">
+        <label for="title">Filename</label>
+        <input type="text" name="title" class="form-control" aria-describedby="titleHelp">
+        <small id="titleHelp" class="form-text text-muted">Please write the filename with the proper extension.</small>
+      </div>
+      <div class="form-group">
+        <label for="body">Gist</label>
+        <textarea class="form-control" name="body" rows="18"></textarea>
+      </div>
+      <button type="submit" class="btn btn-success">Create</button>
+      <a href="/" class="btn btn-primary" role="button">Return home</a>
+    </div>
+  </form>
 </body>
 
 

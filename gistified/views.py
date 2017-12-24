@@ -46,6 +46,22 @@ def gists_id(id):
     try:
         int(id)
         gist = Gist.query.filter_by(id=id).first()
-        return render_template('gist_id.html', gist=gist)
+        return render_template('gist_id.html', gist=gist, is_lang_defined=Gist.is_lang_defined(gist))
     except:
         abort(404)
+
+
+@app.route('/gist/<id>/delete', methods=['POST'])
+def delete_gist(id):
+    """
+    Delete single gist
+    """
+    # Note: This endpoint does is not set to the HTTP method DELETE because
+    # in 'gists.html' file, if a gist is clickled to be deleted and if DELETE remained, it
+    # would not work, the reason being that HTML5 does not support PUT and DELETE methods.
+
+    gist = Gist.query.filter_by(id=id).first()
+    db.session.delete(gist)
+    db.session.commit()
+
+    return render_template('home.html')
