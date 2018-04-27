@@ -5,8 +5,10 @@ from gistified import create_app
 
 # Test for feito
 def test(one, 
-   two, three):
- 
+   two, three
+
+):
+   pass 
 
 app = create_app()
 
